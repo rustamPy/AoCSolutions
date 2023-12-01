@@ -38,20 +38,25 @@ if __name__ == "__main__":
         inp_type = 'y'
 
     input_str = ''
+    replit_path = 'https://replit.com/@rustamPy/AoCSolutions#'
+    input_path = f'inputs/{year_input}/day_{day_input}_input.txt'
     if inp_type == "y":
         try:
-            with open(f"inputs/{year_input}/day_{day_input}_input.txt", "r") as f:
+            with open(input_path, "r") as f:
                 input_str = f.read()
         except FileNotFoundError:
             print(f"No input for {year_input}-December-{day_input}")
-
-
 
     else:
         input_str = input("Enter string input: ")
 
     print('--------------------------------------------')
-    print(f'INPUT: {input_str}')
+    if inp_type == "y":
+        print(f'INPUT PATH: {replit_path}{input_path}')
+    else:
+        print(f'YOUR INPUT: {input_str}')
     print('--------------------------------------------')
-    print(f"THE ANSWER IS: {run_task(year_input, day_input, part_input, input_str)}")
+    print(
+        f"THE ANSWER IS: {run_task(year_input, day_input, part_input, input_str)}"
+    )
     print('--------------------------------------------')
