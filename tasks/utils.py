@@ -11,6 +11,8 @@ def left_right_founder(s: str, reverse: bool) -> str:
         'nine': '9'
     }
 
+    # ls = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+
     if not reverse:
         for i in range(1, len(s) + 1):
             substr = s[:i]
@@ -27,4 +29,9 @@ def left_right_founder(s: str, reverse: bool) -> str:
                     return s[i]
                 if k in substr:
                     return v
+
+                """
+                if number in substr:
+                    return str(ind + 1)
+                """
     return ''
