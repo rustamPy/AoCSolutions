@@ -35,3 +35,7 @@ def left_right_founder(s: str, reverse: bool) -> str:
                     return str(ind + 1)
                 """
     return ''
+
+
+def common_letters(word_1, word_2):
+    return ''.join(c1 for c1, c2 in zip(word_1, word_2) if c1 == c2)
