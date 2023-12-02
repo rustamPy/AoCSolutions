@@ -1,14 +1,22 @@
-# Assuming 'd5424f6a0e43' is the latest commit and '42a01d755520' is an earlier commit
-earlier_commit="42a01d755520"
-latest_commit="d5424f6a0e43"
+name: Validate committed file names in tasks/
 
-# Get the list of modified files between the two commits
-files=$(git diff --name-only $earlier_commit $latest_commit)
+on:
+  push:
+    branches:
+      - main
 
-# Check if the desired test file names are modified
-if echo "$files" | grep -E 'tasks/[0-9]+/day_[0-9]+_solutions\.py$'; then
-  echo "Test files found! Do something..."
-else
-  echo "Test files not found or have incorrect names."
-  echo "Ensure files are named day_1_solutions.py, day_13_solutions.py, etc."
-fi
+jobs:
+  validate-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Validate committed file names in tasks/
+        run: |
+          git diff --name-only HEAD^ HEAD tasks/[0-9]+ | for file in $(cat); do
+            if ! [[ $file =~ ^task_[0-9]_solutions.py$ ]]; then
+              echo "Invalid file name: $file"
+              exit 1
+            fi
+          done
