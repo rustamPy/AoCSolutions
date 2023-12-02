@@ -56,6 +56,8 @@ if __name__ == "__main__":
         print(f'INPUT PATH: {REPLIT_PATH}{INPUT_PATH}')
     else:
         print(f'YOUR INPUT: {INPUT_STR}')
+
+    print(f'AOC TASK LINK: https://adventofcode.com/{YEAR_INPUT}/day/{DAY_INPUT}')
     print('--------------------------------------------')
     print(
         f"THE ANSWER IS: {run_task(YEAR_INPUT, DAY_INPUT, PART_INPUT, INPUT_STR)}"
