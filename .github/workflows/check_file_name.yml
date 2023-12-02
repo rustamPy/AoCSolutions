@@ -15,6 +15,7 @@ jobs:
       - name: Validate committed file names in tasks/
         run: |
           git diff --name-only HEAD^ HEAD tasks/[0-9]+ | for file in $(cat); do
+            echo "$file"
             if ! [[ $file =~ ^task_[0-9]+_solutions\.py$ ]]; then
               echo "Invalid file name: $file"
               exit 1
