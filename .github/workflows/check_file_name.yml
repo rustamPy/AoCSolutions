@@ -1,0 +1,27 @@
+name: Check Test File Names
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-test-file-names:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check test file names
+      run: |
+        # Get the list of modified files
+        files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+        # Check if the desired test file names are modified
+        if echo "$files" | grep -E 'tasks/^[0-9]+$/day_[0-9]+_solutions\.py$'; then
+          echo "Test files found! Do something..."
+        else
+          echo "Test files not found or have incorrect names."
+          echo "Ensure files are named test_1_solutions.py, test_13_solutions.py, etc."
+        fi
