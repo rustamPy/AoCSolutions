@@ -1,7 +1,7 @@
-from typing import Tuple
+from typing import Tuple, List, Dict
 
 
-def builder(line: str) -> Tuple[dict, str]:
+def builder(line: str) -> Tuple[Dict[str, int], List[str]]:
     s = {"red": 0, 'green': 0, 'blue': 0}
     data = ''.join(line.split("Game ")).split(' ')
     for i in range(2, len(data)):
