@@ -1,27 +1,14 @@
-name: Check Test File Names
+# Assuming 'd5424f6a0e43' is the latest commit and '42a01d755520' is an earlier commit
+earlier_commit="42a01d755520"
+latest_commit="d5424f6a0e43"
 
-on:
-  push:
-    branches:
-      - main
+# Get the list of modified files between the two commits
+files=$(git diff --name-only $earlier_commit $latest_commit)
 
-jobs:
-  check-test-file-names:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Check test file names
-      run: |
-        # Get the list of modified files
-        files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
-        echo "$files"
-        # Check if the desired test file names are modified
-        if echo "$files" | grep -E 'tasks/[0-9]+/day_[0-9]+_solutions\.py$'; then
-          echo "Test files found! Do something..."
-        else
-          echo "Test files not found or have incorrect names."
-          echo "Ensure files are named test_1_solutions.py, test_13_solutions.py, etc."
-        fi
+# Check if the desired test file names are modified
+if echo "$files" | grep -E 'tasks/[0-9]+/day_[0-9]+_solutions\.py$'; then
+  echo "Test files found! Do something..."
+else
+  echo "Test files not found or have incorrect names."
+  echo "Ensure files are named day_1_solutions.py, day_13_solutions.py, etc."
+fi
