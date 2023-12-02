@@ -1,11 +1,11 @@
-def run_task(year: str = '', day: str = '', part: str = '', input: str = ''):
+def run_task(year: str = '', day: str = '', part: str = '', inp: str = ''):
     module_name = f"tasks.{year}.day_{day}_solutions"
     function_name = f"part_{part}"
 
     try:
         module = __import__(module_name, fromlist=[function_name])
         func = getattr(module, function_name)
-        return func(input)
+        return func(inp)
 
     except ImportError:
         print(
@@ -14,49 +14,50 @@ def run_task(year: str = '', day: str = '', part: str = '', input: str = ''):
 
     except AttributeError:
         print(
-            f"Function -> part_{part} not found in tasks.{year}.day_{day}_solutions - didn't complete the part {part} yet"
+            f"Function -> part_{part} not found in tasks.{year}.day_{day}_solutions - "
+            f"didn't complete the part {part} yet"
         )
 
 
 if __name__ == "__main__":
-    year_input = input("Enter year (2023 is default): ")
-    day_input = input("Enter day number (1 is default): ")
-    part_input = input("Enter part number (1 is default): ")
+    YEAR_INPUT = input("Enter year (2023 is default): ")
+    DAY_INPUT = input("Enter day number (1 is default): ")
+    PART_INPUT = input("Enter part number (1 is default): ")
 
-    if not year_input or len(year_input) < 4:
-        year_input = '2023'
+    if not YEAR_INPUT or len(YEAR_INPUT) < 4:
+        YEAR_INPUT = '2023'
 
-    if not day_input or day_input not in map(str, range(1, 26)):
-        day_input = '1'
+    if not DAY_INPUT or DAY_INPUT not in map(str, range(1, 26)):
+        DAY_INPUT = '1'
 
-    if not part_input or part_input not in map(str, [1, 2]):
-        part_input = '1'
+    if not PART_INPUT or PART_INPUT not in map(str, [1, 2]):
+        PART_INPUT = '1'
 
-    inp_type = input("Is your input a file? (y/n) (y is default): ").lower()
+    INP_TYPE = input("Is your input a file? (y/n) (y is default): ").lower()
 
-    if not inp_type and inp_type not in ['y', 'n']:
-        inp_type = 'y'
+    if not INP_TYPE and INP_TYPE not in ['y', 'n']:
+        INP_TYPE = 'y'
 
-    input_str = ''
-    replit_path = 'https://replit.com/@rustamPy/AoCSolutions#'
-    input_path = f'inputs/{year_input}/day_{day_input}_input.txt'
-    if inp_type == "y":
+    INPUT_STR = ''
+    REPLIT_PATH = 'https://replit.com/@rustamPy/AoCSolutions#'
+    INPUT_PATH = f'inputs/{YEAR_INPUT}/day_{DAY_INPUT}_input.txt'
+    if INP_TYPE == "y":
         try:
-            with open(input_path, "r") as f:
-                input_str = f.read()
+            with open(INPUT_PATH, "r") as f:
+                INPUT_STR = f.read()
         except FileNotFoundError:
-            print(f"No input for {year_input}-December-{day_input}")
+            print(f"No input for {YEAR_INPUT}-December-{DAY_INPUT}")
 
     else:
-        input_str = input("Enter string input: ")
+        INPUT_STR = input("Enter string input: ")
 
     print('--------------------------------------------')
-    if inp_type == "y":
-        print(f'INPUT PATH: {replit_path}{input_path}')
+    if INP_TYPE == "y":
+        print(f'INPUT PATH: {REPLIT_PATH}{INPUT_PATH}')
     else:
-        print(f'YOUR INPUT: {input_str}')
+        print(f'YOUR INPUT: {INPUT_STR}')
     print('--------------------------------------------')
     print(
-        f"THE ANSWER IS: {run_task(year_input, day_input, part_input, input_str)}"
+        f"THE ANSWER IS: {run_task(YEAR_INPUT, DAY_INPUT, PART_INPUT, INPUT_STR)}"
     )
     print('--------------------------------------------')
