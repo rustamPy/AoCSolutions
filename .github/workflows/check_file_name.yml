@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  validate-files:
+  validate-task-files:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +15,7 @@ jobs:
       - name: Validate committed file names in tasks/
         run: |
           git diff --name-only HEAD^ HEAD tasks/[0-9]+ | for file in $(cat); do
-            if ! [[ $file =~ ^task_[0-9]_solutions.py$ ]]; then
+            if ! [[ $file =~ ^task_[0-9]_solutions\.py$ ]]; then
               echo "Invalid file name: $file"
               exit 1
             fi
