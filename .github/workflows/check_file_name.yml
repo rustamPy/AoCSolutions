@@ -19,7 +19,7 @@ jobs:
         files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
 
         # Check if the desired test file names are modified
-        if echo "$files" | grep -E 'tasks/^[0-9]+$/day_[0-9]+_solutions\.py$'; then
+        if echo "$files" | grep -E 'tasks/[0-9]+/day_[0-9]+_solutions\.py$'; then
           echo "Test files found! Do something..."
         else
           echo "Test files not found or have incorrect names."
