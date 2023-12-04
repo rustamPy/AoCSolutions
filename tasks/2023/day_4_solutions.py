@@ -6,9 +6,9 @@ def part_1(_input: str):
     res = 0
     for l in _input.splitlines():
         nums, winners = get_nums_and_winners(l)
-        diff = sum(1 for i in winners if i in nums)
-        total = 2 ** (diff - 1)
-        res += total if diff > 0 else 0
+        matches = len(nums & winners)
+        points = 2 ** (matches - 1)
+        res += points if matches > 0 else 0
     return res
 
 

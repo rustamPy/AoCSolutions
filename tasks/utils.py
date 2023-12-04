@@ -43,7 +43,7 @@ def common_letters(word_1, word_2):
 
 def get_nums_and_winners(line: str):
     l_part, r_part = line.split('|')
-    nums = set([int(n) for n in l_part.split() if n.isdigit() and ':' not in n])
-    winners = set([int(n) for n in r_part.split()])
+    winners = set([int(n) for n in l_part.split() if n.isdigit() and ':' not in n])
+    nums = set([int(n) for n in r_part.split()])
 
     return nums, winners
