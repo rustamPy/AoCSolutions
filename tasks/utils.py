@@ -39,3 +39,11 @@ def left_right_founder(s: str, reverse: bool) -> str:
 
 def common_letters(word_1, word_2):
     return ''.join(c1 for c1, c2 in zip(word_1, word_2) if c1 == c2)
+
+
+def get_nums_and_winners(line: str):
+    l_part, r_part = line.split('|')
+    nums = set([int(n) for n in l_part.split() if n.isdigit() and ':' not in n])
+    winners = set([int(n) for n in r_part.split()])
+
+    return nums, winners
